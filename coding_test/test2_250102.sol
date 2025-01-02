@@ -11,20 +11,6 @@ contract coding {
 
     student[] public students;
 
-    function addStudent(string memory _name, uint _number, uint _score) public  {
-        for (uint i=0; i<students.length; i++) 
-        {
-            if (keccak256(bytes(students[i].name)) == keccak256(bytes(_name))) {
-                revert("Student name already exists.");
-            }
-            if (students[i].number == _number) {
-                revert("Student number already exists.");
-            }
-        }
-        
-        students.push(student(_number, _name, _score));
-    }
-
     function lowestScore() public view returns (student memory) {
         uint min = type(uint).max;
         uint index;

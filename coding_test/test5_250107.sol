@@ -74,7 +74,7 @@ contract test5 {
     }
 
     function setPrize(uint win) internal pure returns (uint) {
-        uint256 prize;
+        uint prize;
         if (win == 6) prize = 1 ether;
         if (win == 5) prize = 0.75 ether;
         if (win == 4) prize = 0.25 ether;

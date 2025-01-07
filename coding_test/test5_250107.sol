@@ -25,14 +25,14 @@ contract test5 {
     }
     
     function setWin(uint8[4] memory numbers, string[2] memory letters) public {
-        require(msg.sender == admin, "this function is for admin");
+        require(msg.sender == admin, "This function is for admin");
         Numbers = numbers;
         Letters = letters;
     }
 
     function lotto(uint8[4] memory numbers, string[2] memory letters) public payable returns (uint) {
         uint fee = 0.05 ether;
-        require(msg.value == fee, "lotto fee is 0.05 ether");
+        require(msg.value == fee, "Lotto fee is 0.05 ether");
 
         uint win;
         win += numberCheck(numbers);

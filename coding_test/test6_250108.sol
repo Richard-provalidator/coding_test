@@ -62,15 +62,19 @@ contract test6 {
     }
 
     // 안건 제안 기능 - 자신이 원하는 안건을 제안하는 기능
-    function propose(string calldata title, string calldata description) public isUserSet() {
+    function propose(string calldata title, string calldata description) public isUserSet {
         proposals[idCounter] = proposal(idCounter, title, description, msg.sender, 0, 0, block.number, Status.Voting);
         
         users[msg.sender].proposedProposals.push(idCounter);
         idCounter++;
     }
 
-    function getProposedProposal() public view {
-
+    function getProposedProposal() public view isUserSet returns (proposal[] memory) {
+        proposal[] memory proposed = new proposal[](users[msg.sender].proposedProposals.length);
+        for (uint i = 0; i < users[msg.sender].proposedProposals.length; i++) {
+            proposed[i] = proposals[users[msg.sender].proposedProposals[i]];
+        }
+        return proposed;
     }
 
     function getProposals() public view returns (proposal[] memory) {
@@ -78,7 +82,7 @@ contract test6 {
     }
 
     // 투표하는 기능 - 특정 안건에 대하여 투표하는 기능, 안건은 제목으로 검색, 이미 투표한 건에 대해서는 재투표 불가능
-    function vote(string calldata title, bool voting) public isUserSet() {
+    function vote(string calldata title, bool voting) public isUserSet {
         uint id = findProposal(title);
         require(!users[msg.sender].proposalVoted[id], "You already voted this proposal");
         require(proposals[id].status == Status.Voting, "Proposal voting time ended");

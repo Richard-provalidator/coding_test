@@ -83,7 +83,4 @@ contract test8 {
 
         balance[msg.sender] += msg.value;
     }
-
-
-
 }

@@ -40,10 +40,6 @@ contract tokenB is ERC721 {
     uint price;
     uint buyCount;
 
-    function onERC721Received(address, address, uint256, bytes memory) public virtual returns (bytes4) {
-        return this.onERC721Received.selector;
-    }
-
     function buyToken() public payable {
         if (buyCount < 10) price = 50;
         else if (buyCount < 30) price = 100;

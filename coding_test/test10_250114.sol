@@ -47,10 +47,8 @@ contract tokenB is ERC721 {
         require(A.balanceOf(_msgSender()) >= price, "need more than price");
         A.transferFrom(_msgSender(), address(this), price);
 
-        uint256 tokenId = buyCount;
-        _safeMint(_msgSender(), tokenId);
+        _safeMint(_msgSender(), buyCount);
         buyCount++;
-
     }
 
     function burnToken(uint tokenId) public {
